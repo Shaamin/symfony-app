@@ -10,14 +10,14 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Validate composer.json and composer.lock
+    - name: Валидация composer.json и composer.lock
       run: composer validate
 
-    - name: Install dependencies
+    - name: Инициализировать окружение
+      run: make cp-env-test
+
+    - name: Установить зависимости
       run: composer install --prefer-dist --no-progress --no-suggest
 
-    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-    # Docs: https://getcomposer.org/doc/articles/scripts.md
-
-    - name: Run test suite
+    - name: Запустить тесты
       run: make test
