@@ -20,13 +20,13 @@ jobs:
       run: make run
 
     - name: Валидация composer.json и composer.lock
-      run: docker-compose exec php-fpm /bin/sh -c "composer validate"
+      run: docker-compose exec -T php-fpm /bin/sh -c "composer validate"
 
     - name: Установить зависимости
-      run: docker-compose exec php-fpm /bin/sh -c "composer install --prefer-dist --no-progress --no-suggest"
+      run: docker-compose exec -T php-fpm /bin/sh -c "composer install --prefer-dist --no-progress --no-suggest"
 
     - name: Чистка кеша
-      run: docker-compose exec php-fpm /bin/sh -c "make cc-test"
+      run: docker-compose exec -T php-fpm /bin/sh -c "make cc-test"
 
     - name: Запустить тесты
-      run: docker-compose exec php-fpm /bin/sh -c "make test"
+      run: docker-compose exec -T php-fpm /bin/sh -c "make test"
