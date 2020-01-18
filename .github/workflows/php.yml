@@ -19,14 +19,14 @@ jobs:
     - name: Запуск docker-compose
       run: make run
 
+    - name: Заходим в bash контейнера
+      run: make bash
+
     - name: Валидация composer.json и composer.lock
       run: composer validate
 
     - name: Установить зависимости
       run: composer install --prefer-dist --no-progress --no-suggest
-
-    - name: Права для кеша test
-      run: mkdir -p var/cache/test && chmod 777 var/cache/test
 
     - name: Чистка кеша
       run: make cc-test
