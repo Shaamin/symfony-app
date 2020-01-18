@@ -10,3 +10,8 @@ homepage:
     defaults:
         template: default/homepage.html.twig
         _locale: '%locale%'
+
+api_test:
+    path:       /api/v1/test
+    controller: App\Controller\Test\TestController::test
+    methods:    GET

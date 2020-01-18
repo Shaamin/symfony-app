@@ -32,3 +32,6 @@ services:
     # 'arguments' key and define the arguments just below the service class
     App\EventSubscriber\CommentNotificationSubscriber:
         $sender: '%app.notifications.email_sender%'
+
+    sensio_framework_extra.view.listener:
+        alias: Sensio\Bundle\FrameworkExtraBundle\EventListener\TemplateListener
