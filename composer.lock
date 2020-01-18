@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f019fde4ad00ea50aca6cf7b45e9d8d5",
+    "content-hash": "a68ac7b6fe5c3458a951a16f1298968c",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -6190,6 +6190,7 @@
                 "code",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-code",
             "time": "2018-08-13T20:36:59+00:00"
         },
         {
@@ -6244,6 +6245,7 @@
                 "events",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-eventmanager",
             "time": "2018-04-25T15:33:34+00:00"
         }
     ],

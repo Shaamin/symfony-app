@@ -1,7 +1,15 @@
 {
+    "name": "shaamin/symfony-app",
+    "description": "Symfony app",
     "license": "proprietary",
     "type": "project",
     "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Potupchik Ivan",
+            "email": "pia.web.work@gmail.com"
+        }
+    ],
     "require": {
         "php": "^7.1.3",
         "ext-pdo_sqlite": "*",
