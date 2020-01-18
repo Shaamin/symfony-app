@@ -10,14 +10,20 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Валидация composer.json и composer.lock
-      run: composer validate
-
     - name: Инициализировать окружение
       run: make cp-env-test
 
+    - name: Запуск docker-compose
+      run: make run
+
+    - name: Валидация composer.json и composer.lock
+      run: composer validate
+
     - name: Установить зависимости
       run: composer install --prefer-dist --no-progress --no-suggest
+
+    - name: Чистка кеша
+      run: make cc-test
 
     - name: Запустить тесты
       run: make test

@@ -15,6 +15,9 @@ bash:
 cc:
 	bin/console cache:clear
 
+cc-test:
+	bin/console cache:clear -e test
+
 test:
 	vendor/bin/codecept run
 
