@@ -13,6 +13,9 @@ jobs:
     - name: Инициализировать окружение
       run: make cp-env-test
 
+    - name: Создание docker-compose.yml
+      run: make cp-docker-compose
+
     - name: Запуск docker-compose
       run: make run
 

@@ -24,5 +24,8 @@ test:
 cp-env-test:
 	cp .env.test .env
 
+cp-docker-compose:
+	cp docker-compose.yml.dist docker-compose.yml
+
 cp-env-dev:
 	cp .env.dev .env
