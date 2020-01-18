@@ -28,5 +28,8 @@ jobs:
     - name: Чистка кеша
       run: docker-compose exec -T php-fpm /bin/sh -c "make cc-test"
 
+    - name: Загрузить фикстуры
+      run: docker-compose exec -T php-fpm /bin/sh -c "php bin/console doctrine:fixtures:load -e test"
+
     - name: Запустить тесты
       run: docker-compose exec -T php-fpm /bin/sh -c "make test"
