@@ -1,6 +1,7 @@
 <?php
 
 use Symfony\Component\Dotenv\Dotenv;
+use App\Enum\Environment;
 
 require dirname(__DIR__).'/vendor/autoload.php';
 
@@ -14,7 +15,9 @@ if (is_array($env = @include dirname(__DIR__).'/.env.local.php')) {
     throw new RuntimeException('Please run "composer require symfony/dotenv" to load the ".env" files configuring the application.');
 } else {
     // load all the .env files
-    (new Dotenv(false))->loadEnv(dirname(__DIR__) . '/.env');
+    $env = $_ENV['APP_ENV'] ?? $_SERVER['APP_ENV']  ?? null;
+    $filename = $env && $env !== Environment::PROD  ? "/.env.{$env}" : '/.env';
+    (new Dotenv(false))->loadEnv(dirname(__DIR__) . $filename);
 }
 
 $_SERVER += $_ENV;
