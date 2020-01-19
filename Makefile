@@ -29,3 +29,9 @@ cp-docker-compose:
 
 cp-env-dev:
 	cp .env.dev .env
+
+migration-generate:
+	bin/console doctrine:migrations:generate
+
+up:
+	bin/console doctrine:migrations:execute
