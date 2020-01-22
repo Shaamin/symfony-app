@@ -3,11 +3,18 @@ version: '3.7'
 services:
 
   php-fpm:
-    image: shaamin/php-fpm:1.1
+    image: shaamin/php-fpm:1.2
+    args:
+      - USER_ID
+      - GROUP_ID
     volumes:
       - ${APP_PATH_HOST}:${APP_PATH_CONTAINER}
     ports:
       - 9000:9000
+    environment:
+      XDEBUG_CONFIG: "remote_host=192.168.220.1 remote_enable=1 remote_autostart=off  remote_port=9002"
+    networks:
+      - test-network
     working_dir: ${APP_PATH_CONTAINER}
 
   nginx:
@@ -18,18 +25,34 @@ services:
       - ./var/log/nginx:/var/log/nginx
     ports:
       - 8080:80
+    depends_on:
+      - php-fpm
+    networks:
+      test-network:
+        aliases:
+          - app.local
     working_dir: ${APP_PATH_CONTAINER}
 
   postgresql:
     image: postgres:11.5
     ports:
-      - ${PG_PORT}:5432
+      - '5432:5432'
     working_dir: ${APP_PATH_CONTAINER}
     restart: always
     environment:
-      POSTGRES_DB: ${PG_NAME}
-      POSTGRES_USER: ${PG_USER}
-      POSTGRES_PASSWORD: ${PG_PASSWORD}
+      POSTGRES_DB: 'db_name'
+      POSTGRES_USER: 'db_user'
+      POSTGRES_PASSWORD: '123456'
+    networks:
+      - test-network
     volumes:
       - ./../data/dump:/app/dump
       - ./../data/postgresql:/var/lib/postgresql/data
+
+  networks:
+    test-network:
+      driver: bridge
+      ipam:
+        driver: default
+        config:
+          - subnet: 192.168.220.0/28
