@@ -3,7 +3,7 @@ version: '3.7'
 services:
 
   php-fpm:
-    image: shaamin/php-fpm:1.2
+    image: shaamin/php-fpm:1.4
     args:
       - USER_ID
       - GROUP_ID

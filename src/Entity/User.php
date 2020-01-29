@@ -1,106 +1,61 @@
 <?php
 
-/*
- * This file is part of the Symfony package.
- *
- * (c) Fabien Potencier <fabien@symfony.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @ORM\Table(name="symfony_demo_user")
- *
- * Defines the properties of the User entity to represent the application users.
- * See https://symfony.com/doc/current/book/doctrine.html#creating-an-entity-class
- *
- * Tip: if you have an existing database, you can generate these entity class automatically.
- * See https://symfony.com/doc/current/cookbook/doctrine/reverse_engineering.html
- *
- * @author Ryan Weaver <weaverryan@gmail.com>
- * @author Javier Eguiluz <javier.eguiluz@gmail.com>
  */
-class User implements UserInterface, \Serializable
+class User
 {
     /**
-     * @var int
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255)
      */
-    private $fullName;
+    private $name;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(type="string", unique=true)
-     * @Assert\NotBlank()
-     * @Assert\Length(min=2, max=50)
-     */
-    private $username;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", unique=true)
-     * @Assert\Email()
+     * @ORM\Column(type="string", length=128)
      */
     private $email;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=63)
      */
     private $password;
 
     /**
-     * @var array
-     *
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="string", length=255)
      */
-    private $roles = [];
+    private $showname;
+
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $age;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setFullName(string $fullName): void
+    public function getName(): ?string
     {
-        $this->fullName = $fullName;
+        return $this->name;
     }
 
-    public function getFullName(): ?string
+    public function setName(string $name): self
     {
-        return $this->fullName;
-    }
+        $this->name = $name;
 
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): void
-    {
-        $this->username = $username;
+        return $this;
     }
 
     public function getEmail(): ?string
@@ -108,9 +63,11 @@ class User implements UserInterface, \Serializable
         return $this->email;
     }
 
-    public function setEmail(string $email): void
+    public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
     }
 
     public function getPassword(): ?string
@@ -118,71 +75,34 @@ class User implements UserInterface, \Serializable
         return $this->password;
     }
 
-    public function setPassword(string $password): void
+    public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
     }
 
-    /**
-     * Returns the roles or permissions granted to the user for security.
-     */
-    public function getRoles(): array
+    public function getShowname(): ?string
     {
-        $roles = $this->roles;
-
-        // guarantees that a user always has at least one role for security
-        if (empty($roles)) {
-            $roles[] = 'ROLE_USER';
-        }
-
-        return array_unique($roles);
+        return $this->showname;
     }
 
-    public function setRoles(array $roles): void
+    public function setShowname(string $showname): self
     {
-        $this->roles = $roles;
+        $this->showname = $showname;
+
+        return $this;
     }
 
-    /**
-     * Returns the salt that was originally used to encode the password.
-     *
-     * {@inheritdoc}
-     */
-    public function getSalt(): ?string
+    public function getAge(): ?int
     {
-        // See "Do you need to use a Salt?" at https://symfony.com/doc/current/cookbook/security/entity_provider.html
-        // we're using bcrypt in security.yml to encode the password, so
-        // the salt value is built-in and you don't have to generate one
-
-        return null;
+        return $this->age;
     }
 
-    /**
-     * Removes sensitive data from the user.
-     *
-     * {@inheritdoc}
-     */
-    public function eraseCredentials(): void
+    public function setAge(int $age): self
     {
-        // if you had a plainPassword property, you'd nullify it here
-        // $this->plainPassword = null;
-    }
+        $this->age = $age;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function serialize(): string
-    {
-        // add $this->salt too if you don't use Bcrypt or Argon2i
-        return serialize([$this->id, $this->username, $this->password]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function unserialize($serialized): void
-    {
-        // add $this->salt too if you don't use Bcrypt or Argon2i
-        [$this->id, $this->username, $this->password] = unserialize($serialized, ['allowed_classes' => false]);
+        return $this;
     }
 }
