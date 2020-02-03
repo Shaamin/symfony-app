@@ -3,12 +3,16 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
+ * @ORM\Table(name="client", schema="client")
  */
-class User
+class Client
 {
+    use TimestampableEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -22,7 +26,7 @@ class User
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=128)
+     * @ORM\Column(type="string", length=127)
      */
     private $email;
 
@@ -40,6 +44,17 @@ class User
      * @ORM\Column(type="smallint")
      */
     private $age;
+
+    /**
+     * @ORM\Column(type="GenderType")
+     */
+    private $gender;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\SignupApplication", inversedBy="client", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $signupApplication;
 
     public function getId(): ?int
     {
@@ -102,6 +117,30 @@ class User
     public function setAge(int $age): self
     {
         $this->age = $age;
+
+        return $this;
+    }
+
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    public function setGender($gender): self
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    public function getSignupApplication(): ?SignupApplication
+    {
+        return $this->signupApplication;
+    }
+
+    public function setSignupApplication(SignupApplication $signupApplication): self
+    {
+        $this->signupApplication = $signupApplication;
 
         return $this;
     }

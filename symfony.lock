@@ -1,6 +1,21 @@
 {
+    "antishov/doctrine-extensions-bundle": {
+        "version": "1.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.4",
+            "ref": "6c1ceb662f8997085f739cd089bfbef67f245983"
+        },
+        "files": [
+            "config/packages/stof_doctrine_extensions.yaml"
+        ]
+    },
     "behat/gherkin": {
         "version": "v4.6.0"
+    },
+    "behat/transliterator": {
+        "version": "v1.3.0"
     },
     "codeception/codeception": {
         "version": "2.3",
@@ -176,6 +191,9 @@
         "files": [
             "config/packages/fos_rest.yaml"
         ]
+    },
+    "gedmo/doctrine-extensions": {
+        "version": "v2.4.39"
     },
     "guzzlehttp/guzzle": {
         "version": "6.3.3"

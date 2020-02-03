@@ -34,4 +34,13 @@ migration-generate:
 	bin/console doctrine:migrations:generate
 
 up:
-	bin/console doctrine:migrations:execute
+	bin/console doctrine:migrations:migrate
+
+up-test:
+	bin/console doctrine:migrations:migrate -e test
+
+down:
+	bin/console doctrine:migrations:execute $v --down
+
+migration-generate:
+	bin/console make:migration

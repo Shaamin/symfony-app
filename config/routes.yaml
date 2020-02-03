@@ -2,21 +2,3 @@
 # the route (FrameworkBundle:Template:template) is a convenient shortcut when
 # the template can be rendered without executing any logic in your own controller.
 # See https://symfony.com/doc/current/cookbook/templating/render_without_controller.html
-homepage:
-    path: /{_locale}
-    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
-    requirements:
-        _locale: '%app_locales%'
-    defaults:
-        template: default/homepage.html.twig
-        _locale: '%locale%'
-
-api_test:
-    path:       /api/v1/test
-    controller: App\Controller\Test\TestController::test
-    methods:    GET
-
-api_post_create_user:
-    path:       /api/v1/user
-    controller: App\Controller\User\UserController::createUser
-    methods:    POST
